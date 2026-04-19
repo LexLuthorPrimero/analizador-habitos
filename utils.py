@@ -15,9 +15,5 @@ def mostrar_resumen(habitos):
     for nombre, minutos in habitos.items():
         print(f"{nombre}: {minutos} min")
 
-    total = calcular_total(habitos)
-    promedio = calcular_promedio(habitos)
-
-    print("\nTotal de minutos:", total)
-    print("Cantidad de hábitos:", len(habitos))
-    print("Promedio por hábito:", round(promedio, 2))
+    print("\nTotal:", calcular_total(habitos))
+    print("Promedio:", round(calcular_promedio(habitos), 2))

@@ -25,3 +25,15 @@ Proyecto básico en Python que permite registrar hábitos diarios y calcular mé
 
 ```bash
 python main.py
+
+
+## 🆕 Versión 2
+
+- Persistencia de datos con JSON
+- Historial por fecha
+- Carga y guardado automático
+
+## 💡 Mejora respecto a la versión 1
+
+Antes los datos se perdían al cerrar el programa.
+Ahora el sistema guarda el progreso diario.
