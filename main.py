@@ -1,48 +1,34 @@
-from utils import mostrar_resumen
-from storage import cargar_datos, guardar_datos
-from datetime import date
-
-
-def pedir_habitos():
-    habitos = {}
-
-    print("🧠 ANALIZADOR DE HÁBITOS")
-    print("Escribí 'fin' para terminar\n")
-
-    while True:
-        nombre = input("Hábito: ")
-
-        if nombre.lower() == "fin":
-            break
-
-        try:
-            minutos = int(input("Minutos: "))
-        except ValueError:
-            print("Número inválido")
-            continue
-
-        habitos[nombre] = minutos
-
-    return habitos
-
-
+from src.storage import add_entry, load_data
+from src.analysis import get_dataframe, compute_insights
+from src.analysis import run_analysis
+from src.storage import load_data
 def main():
-    datos = cargar_datos()
-    hoy = str(date.today())
+    while True:
+        print("\n1. Cargar datos")
+        print("2. Ver análisis")
+        print("3. Salir")
 
-    habitos = pedir_habitos()
+        opcion = input("Elegí: ")
 
-    if not habitos:
-        print("Sin datos ingresados")
-        return
+        if opcion == "1":
+            while True:
+                habito = input("Hábito (fin para salir): ")
+                if habito == "fin":
+                    break
+                minutos = int(input("Minutos: "))
+                add_entry(habito, minutos)
 
-    datos[hoy] = habitos
-    guardar_datos(datos)
+        elif opcion == "2":
+            data = load_data()
+            df = get_dataframe(data)
+            print(df)
 
-    mostrar_resumen(habitos)
+            insights = compute_insights(df)
+            print("\nINSIGHTS")
+            print(insights)
 
-    print("\n📅 Historial guardado correctamente")
-
+        elif opcion == "3":
+            break
 
 if __name__ == "__main__":
     main()
